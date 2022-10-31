@@ -55,18 +55,21 @@ class AnimatedToggle(QCheckBox):
         self.stateChanged.connect(self.setup_animation)
 
     def sizeHint(self):
-        return QSize(58, 45)
+        return QSize(70, 55)
 
     def hitButton(self, pos: QPoint):
         return self.contentsRect().contains(pos)
 
     @pyqtSlot(int)
     def setup_animation(self, value):
+
         self.animations_group.stop()
+
         if value:
             self.animation.setEndValue(1)
         else:
             self.animation.setEndValue(0)
+
         self.animations_group.start()
 
     def paintEvent(self, e: QPaintEvent):

@@ -54,7 +54,7 @@
        </size>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="page_new_user">
        <widget class="QPushButton" name="B_new_user_reg">
@@ -105,7 +105,7 @@
          <string>LOGIN</string>
         </property>
        </widget>
-       <widget class="QLabel" name="L_new_user_purple">
+       <widget class="QLabel" name="L_new_user_const_1">
         <property name="geometry">
          <rect>
           <x>250</x>
@@ -118,7 +118,7 @@
          <string/>
         </property>
        </widget>
-       <widget class="QLabel" name="L_new_user_white">
+       <widget class="QLabel" name="L_new_user_const_2">
         <property name="geometry">
          <rect>
           <x>250</x>
@@ -157,7 +157,7 @@
          <string/>
         </property>
        </widget>
-       <widget class="QLabel" name="L_new_user_name">
+       <widget class="QLabel" name="L_new_user_const_0">
         <property name="geometry">
          <rect>
           <x>410</x>
@@ -170,11 +170,11 @@
          <string>HELLO!</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="B_new_user_to_user">
+       <widget class="QPushButton" name="skip">
         <property name="geometry">
          <rect>
-          <x>710</x>
-          <y>622</y>
+          <x>670</x>
+          <y>590</y>
           <width>41</width>
           <height>41</height>
          </rect>
@@ -183,17 +183,31 @@
          <string/>
         </property>
        </widget>
-       <zorder>L_new_user_purple</zorder>
-       <zorder>L_new_user_white</zorder>
+       <widget class="QLabel" name="L_new_user_const_3">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>640</y>
+          <width>500</width>
+          <height>45</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <zorder>L_new_user_const_1</zorder>
+       <zorder>L_new_user_const_2</zorder>
        <zorder>B_new_user_log</zorder>
        <zorder>B_new_user_reg</zorder>
        <zorder>B_new_user_ic_log</zorder>
        <zorder>B_new_user_ic_reg</zorder>
-       <zorder>L_new_user_name</zorder>
-       <zorder>B_new_user_to_user</zorder>
+       <zorder>L_new_user_const_0</zorder>
+       <zorder>skip</zorder>
+       <zorder>L_new_user_const_3</zorder>
       </widget>
       <widget class="QWidget" name="page_log">
-       <widget class="QLabel" name="L_log_purple">
+       <widget class="QLabel" name="L_log_const_1">
         <property name="geometry">
          <rect>
           <x>250</x>
@@ -206,7 +220,7 @@
          <string/>
         </property>
        </widget>
-       <widget class="QLabel" name="L_log_white">
+       <widget class="QLabel" name="L_log_const_2">
         <property name="geometry">
          <rect>
           <x>250</x>
@@ -219,7 +233,7 @@
          <string/>
         </property>
        </widget>
-       <widget class="QLabel" name="L_log_name">
+       <widget class="QLabel" name="L_log_const_0">
         <property name="geometry">
          <rect>
           <x>410</x>
@@ -343,9 +357,22 @@
          <string/>
         </property>
        </widget>
-       <zorder>L_log_purple</zorder>
-       <zorder>L_log_white</zorder>
-       <zorder>L_log_name</zorder>
+       <widget class="QLabel" name="L_log_const_3">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>640</y>
+          <width>500</width>
+          <height>45</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <zorder>L_log_const_1</zorder>
+       <zorder>L_log_const_2</zorder>
+       <zorder>L_log_const_0</zorder>
        <zorder>B_log_ic_log</zorder>
        <zorder>LE_log_login</zorder>
        <zorder>LE_log_password</zorder>
@@ -355,6 +382,7 @@
        <zorder>B_log_warning_1</zorder>
        <zorder>B_log_warning_2</zorder>
        <zorder>L_log_warning</zorder>
+       <zorder>L_log_const_3</zorder>
       </widget>
       <widget class="QWidget" name="page_reg">
        <widget class="QPushButton" name="B_reg_back">
@@ -370,7 +398,7 @@
          <string/>
         </property>
        </widget>
-       <widget class="QLabel" name="L_reg_purple">
+       <widget class="QLabel" name="L_reg_const_1">
         <property name="geometry">
          <rect>
           <x>250</x>
@@ -383,7 +411,7 @@
          <string/>
         </property>
        </widget>
-       <widget class="QLabel" name="L_reg_white">
+       <widget class="QLabel" name="L_reg_const_2">
         <property name="geometry">
          <rect>
           <x>250</x>
@@ -396,7 +424,7 @@
          <string/>
         </property>
        </widget>
-       <widget class="QLabel" name="L_reg_name">
+       <widget class="QLabel" name="L_reg_const_0">
         <property name="geometry">
          <rect>
           <x>410</x>
@@ -556,9 +584,22 @@
          <string/>
         </property>
        </widget>
-       <zorder>L_reg_purple</zorder>
-       <zorder>L_reg_white</zorder>
-       <zorder>L_reg_name</zorder>
+       <widget class="QLabel" name="L_reg_const_3">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>640</y>
+          <width>500</width>
+          <height>45</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <zorder>L_reg_const_1</zorder>
+       <zorder>L_reg_const_2</zorder>
+       <zorder>L_reg_const_0</zorder>
        <zorder>B_reg_ic_log</zorder>
        <zorder>LE_reg_login</zorder>
        <zorder>LE_reg_password_2</zorder>
@@ -572,9 +613,10 @@
        <zorder>B_reg_warning_1</zorder>
        <zorder>L_reg_warning_1</zorder>
        <zorder>L_reg_warning_2</zorder>
+       <zorder>L_reg_const_3</zorder>
       </widget>
       <widget class="QWidget" name="page_user">
-       <widget class="QLabel" name="L_user_purple">
+       <widget class="QLabel" name="L_user_const_1">
         <property name="geometry">
          <rect>
           <x>250</x>
@@ -587,7 +629,7 @@
          <string/>
         </property>
        </widget>
-       <widget class="QLabel" name="L_user_white">
+       <widget class="QLabel" name="L_user_const_2">
         <property name="geometry">
          <rect>
           <x>250</x>
@@ -613,7 +655,7 @@
          <string/>
         </property>
        </widget>
-       <widget class="QLabel" name="L_user_name">
+       <widget class="QLabel" name="L_user_const_0">
         <property name="geometry">
          <rect>
           <x>410</x>
@@ -630,9 +672,9 @@
         <property name="geometry">
          <rect>
           <x>250</x>
-          <y>190</y>
+          <y>170</y>
           <width>70</width>
-          <height>91</height>
+          <height>111</height>
          </rect>
         </property>
         <property name="frameShape">
@@ -645,7 +687,7 @@
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>20</y>
+           <y>40</y>
            <width>51</width>
            <height>51</height>
           </rect>
@@ -697,9 +739,29 @@
          </property>
         </widget>
        </widget>
+       <widget class="QLabel" name="L_user_const_3">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>640</y>
+          <width>500</width>
+          <height>45</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <zorder>L_user_const_1</zorder>
+       <zorder>L_user_const_2</zorder>
+       <zorder>L_user_const_0</zorder>
+       <zorder>F_user_1</zorder>
+       <zorder>F_user_2</zorder>
+       <zorder>L_user_const_3</zorder>
+       <zorder>B_user_setting</zorder>
       </widget>
       <widget class="QWidget" name="page_profile">
-       <widget class="QLabel" name="L_profile_purple">
+       <widget class="QLabel" name="L_profile_const_1">
         <property name="geometry">
          <rect>
           <x>250</x>
@@ -712,7 +774,7 @@
          <string/>
         </property>
        </widget>
-       <widget class="QLabel" name="L_profile_white">
+       <widget class="QLabel" name="L_profile_const_2">
         <property name="geometry">
          <rect>
           <x>250</x>
@@ -725,7 +787,7 @@
          <string/>
         </property>
        </widget>
-       <widget class="QLabel" name="L_profile_name">
+       <widget class="QLabel" name="L_profile_const_0">
         <property name="geometry">
          <rect>
           <x>410</x>
@@ -810,9 +872,22 @@
          <string/>
         </property>
        </widget>
+       <widget class="QLabel" name="L_profile_const_3">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>640</y>
+          <width>500</width>
+          <height>45</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
       </widget>
       <widget class="QWidget" name="page_edit_profile">
-       <widget class="QLabel" name="L_edit_profile_purple">
+       <widget class="QLabel" name="L_edit_profile_const_1">
         <property name="geometry">
          <rect>
           <x>250</x>
@@ -825,7 +900,7 @@
          <string/>
         </property>
        </widget>
-       <widget class="QLabel" name="L_edit_profile_white">
+       <widget class="QLabel" name="L_edit_profile_const_2">
         <property name="geometry">
          <rect>
           <x>250</x>
@@ -838,7 +913,7 @@
          <string/>
         </property>
        </widget>
-       <widget class="QLabel" name="L_edit_profile_name">
+       <widget class="QLabel" name="L_edit_profile_const_0">
         <property name="geometry">
          <rect>
           <x>320</x>
@@ -949,11 +1024,11 @@
          <string/>
         </property>
        </widget>
-       <widget class="QLabel" name="L_edit_profile_3">
+       <widget class="QLabel" name="L_edit_profile_close_profile">
         <property name="geometry">
          <rect>
-          <x>300</x>
-          <y>530</y>
+          <x>360</x>
+          <y>540</y>
           <width>181</width>
           <height>31</height>
          </rect>
@@ -982,6 +1057,32 @@
           <y>120</y>
           <width>70</width>
           <height>70</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="L_edit_profile_const_3">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>640</y>
+          <width>500</width>
+          <height>45</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="B_edit_profile_close_profile">
+        <property name="geometry">
+         <rect>
+          <x>300</x>
+          <y>530</y>
+          <width>50</width>
+          <height>50</height>
          </rect>
         </property>
         <property name="text">
