@@ -1,4 +1,8 @@
 import sys
+
+import time
+import sqlite3
+
 import re
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QHBoxLayout, \
     QPushButton, QLabel, QLineEdit, QFrame, QHBoxLayout, QVBoxLayout
@@ -41,6 +45,24 @@ class MyWindow(QMainWindow, Ui_MainWindow):  # Главный класс
 
         # \======== PAGE_RES ========/
 
+        # /======== PAGE_FORGOT_PASSWORD ========\
+
+        self.LE_forgot_password_login.setText('')
+        self.LE_forgot_password_email.setText('')
+        self.LE_forgot_password_code.setText('')
+        self.LE_forgot_password_login.setEnabled(True)
+        self.LE_forgot_password_email.setEnabled(True)
+        self.LE_forgot_password_code.hide()
+        self.B_forgot_password_change.hide()
+        self.B_forgot_password_warning_1.hide()
+        self.B_forgot_password_warning_2.hide()
+        self.B_forgot_password_warning_3.hide()
+        self.L_forgot_password_warning.setText('')
+        self.forgot_password_GOG = False
+        self.forgot_login, self.forgot_email = None, None
+
+        # \======== PAGE_FORGOT_PASSWORD ========/
+
         # /======== PAGE_EDIT_PROFILE========\
 
         self.LE_edit_profile_login.setText('')
@@ -53,14 +75,18 @@ class MyWindow(QMainWindow, Ui_MainWindow):  # Главный класс
 
     def __init__(self):
         super().__init__()
+        self.id = None
         self.result = True  # Взять значения из BD
         self.mainToggle = None
-        self.see_password = None
+        self.see_password = False
         self.frame = None
         self.login = None
         self.password_1 = None
         self.password_2 = None
-        self.password = None
+        # self.password = None
+        self.new_user = True
+        self.forgot_password_GOG = False
+        self.forgot_login, self.forgot_email = None, None
         self.setupUi(self)  # Вызываем ui файл
         self.style_new_user()  # Вызываем style_new_user
         self.stackedWidget.setCurrentWidget(
@@ -105,7 +131,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):  # Главный класс
 
         # login icon:
         self.B_new_user_ic_log.setIcon(QIcon(img_log))
-        self.B_new_user_ic_log.setStyleSheet(icon_log_pas)
+        self.B_new_user_ic_log.setStyleSheet(icon_log_pas_email)
 
         # login:
         self.B_new_user_log.setStyleSheet(B_login)
@@ -116,7 +142,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):  # Главный класс
 
         # registration icon:
         self.B_new_user_ic_reg.setIcon(QIcon(img_pas))
-        self.B_new_user_ic_reg.setStyleSheet(icon_log_pas)
+        self.B_new_user_ic_reg.setStyleSheet(icon_log_pas_email)
 
         # registration:
         self.B_new_user_reg.setStyleSheet(B_password)
@@ -161,11 +187,11 @@ class MyWindow(QMainWindow, Ui_MainWindow):  # Главный класс
         # login icon:
 
         self.B_log_ic_log.setIcon(QIcon(img_log))
-        self.B_log_ic_log.setStyleSheet(icon_log_pas)
+        self.B_log_ic_log.setStyleSheet(icon_log_pas_email)
 
         # login:
         self.LE_log_login.setPlaceholderText('Login')
-        self.LE_log_login.setStyleSheet(LE_login_pas)
+        self.LE_log_login.setStyleSheet(LE_login_pas_email)
 
         # \========= LOGIN =========/
 
@@ -173,12 +199,12 @@ class MyWindow(QMainWindow, Ui_MainWindow):  # Главный класс
 
         # registration icon:
         self.B_log_ic_reg.setIcon(QIcon(img_pas))
-        self.B_log_ic_reg.setStyleSheet(icon_log_pas)
+        self.B_log_ic_reg.setStyleSheet(icon_log_pas_email)
 
         # registration:
         self.LE_log_password.setPlaceholderText('Password')
         self.LE_log_password.setEchoMode(QtWidgets.QLineEdit.Password)
-        self.LE_log_password.setStyleSheet(LE_login_pas)
+        self.LE_log_password.setStyleSheet(LE_login_pas_email)
 
         # L_log_warning:
         self.L_log_warning.setStyleSheet(L_warning)
@@ -220,6 +246,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):  # Главный класс
             self.page_new_user)  # Переключаем страничку
 
     def log_save(self):  # Функция сохранения
+        """
         class Error(Exception):
             pass
 
@@ -238,12 +265,58 @@ class MyWindow(QMainWindow, Ui_MainWindow):  # Главный класс
             self.B_log_warning_1.show()
             self.B_log_warning_2.show()
         if result:
+
+            self.user()
+        """
+
+        class Error(Exception):
+            pass
+
+        result = False
+        self.login = self.LE_log_login.text()  # Вывод логина
+        self.password_1 = self.LE_log_password.text()  # Вывод пароля
+        try:
+            # <= SQLITE =>
+            Database = "database.db"
+
+            connect = sqlite3.connect(Database)
+            cursor = connect.cursor()
+
+            if bool(len(cursor.execute("SELECT * FROM users WHERE login = ?",
+                                       (self.login,)).fetchall())):
+                user_password = \
+                    cursor.execute(
+                        "SELECT password FROM users WHERE login = ?",
+                        (self.login,)).fetchone()[0]
+
+                cursor.close()
+                connect.commit()
+                connect.close()
+                # <= SQLITE =>
+                if self.password_1 == user_password:
+                    result = True
+                else:
+                    raise Error()
+            else:
+                raise Error()
+        except Error:
+            self.L_log_warning.setText(
+                '✖ В логине или пароле допущена ошибка ✖')
+            self.B_log_warning_1.show()
+            self.B_log_warning_2.show()
+        if result:
             self.user()
 
     # =========================== PAGE LOG ===========================
 
     # =========================== PAGE REGISTRATION ===========================
     def style_reg(self):  # Стили reg
+
+        # /========= FORGOT PASSWORD =========\
+
+        self.B_reg_forgot_password.setStyleSheet(B_forgot_password)
+
+        # \========= FORGOT PASSWORD =========/
 
         # /========= BACK =========\
 
@@ -278,11 +351,11 @@ class MyWindow(QMainWindow, Ui_MainWindow):  # Главный класс
 
         # login icon:
         self.B_reg_ic_log.setIcon(QIcon(img_log))
-        self.B_reg_ic_log.setStyleSheet(icon_log_pas)
+        self.B_reg_ic_log.setStyleSheet(icon_log_pas_email)
 
         # login:
         self.LE_reg_login.setPlaceholderText('Login')
-        self.LE_reg_login.setStyleSheet(LE_login_pas)
+        self.LE_reg_login.setStyleSheet(LE_login_pas_email)
 
         # \========= LOGIN =========/
 
@@ -292,23 +365,23 @@ class MyWindow(QMainWindow, Ui_MainWindow):  # Главный класс
 
         # registration icon:
         self.B_reg_ic_reg_1.setIcon(QIcon(img_pas))
-        self.B_reg_ic_reg_1.setStyleSheet(icon_log_pas)
+        self.B_reg_ic_reg_1.setStyleSheet(icon_log_pas_email)
 
         # registration:
         self.LE_reg_password_1.setPlaceholderText('Password')
         self.LE_reg_password_1.setEchoMode(QtWidgets.QLineEdit.Password)
-        self.LE_reg_password_1.setStyleSheet(LE_login_pas)
+        self.LE_reg_password_1.setStyleSheet(LE_login_pas_email)
 
         # Поле 2:
 
         # registration icon:
         self.B_reg_ic_reg_2.setIcon(QIcon(img_pas))
-        self.B_reg_ic_reg_2.setStyleSheet(icon_log_pas)
+        self.B_reg_ic_reg_2.setStyleSheet(icon_log_pas_email)
 
         # registration:
         self.LE_reg_password_2.setPlaceholderText('Confirm Password')
         self.LE_reg_password_2.setEchoMode(QtWidgets.QLineEdit.Password)
-        self.LE_reg_password_2.setStyleSheet(LE_login_pas)
+        self.LE_reg_password_2.setStyleSheet(LE_login_pas_email)
 
         # \========= REGISTRATION =========/
 
@@ -341,10 +414,22 @@ class MyWindow(QMainWindow, Ui_MainWindow):  # Главный класс
         self.stackedWidget.setCurrentWidget(
             self.page_reg)  # Переключаем страничку
 
+        # /=================== BUTTON EVENT ===================\
+
         self.B_reg_back.clicked.connect(
             self.reg_back)  # Если нажать кнопку назад
         self.B_reg_save.clicked.connect(
             self.reg_save)  # Если нажать кнопку войти
+        self.B_reg_forgot_password.clicked.connect(self.reg_forgot_password)
+        # Если нажата кнопка забыл пароль
+
+        # \=================== BUTTON EVENT ===================/
+
+    def reg_forgot_password(
+            self):  # Функция переключения на востановления пароля
+        self.stackedWidget.setCurrentWidget(
+            self.page_forgot_password)  # Переключаем страничку
+        self.forgot_password()
 
     def reg_back(self):  # Функция переключения назад
 
@@ -372,8 +457,6 @@ class MyWindow(QMainWindow, Ui_MainWindow):  # Главный класс
         class LoginBusy(Exception):  # Ошибка индивидуальности логина
             pass
 
-        BD = []  # База Данных логинов
-
         result_login, result_password = False, False  # Ресультат проверки
         self.login = self.LE_reg_login.text()  # Вывод логина
         self.password_1 = self.LE_reg_password_1.text()  # Вывод пароля
@@ -381,7 +464,19 @@ class MyWindow(QMainWindow, Ui_MainWindow):  # Главный класс
 
         try:
             if re.fullmatch(r"[a-zA-Z0-9]+", self.login):
-                if self.login not in BD:
+                # <= SQLITE =>
+                Database = "database.db"
+                connect = sqlite3.connect(Database)
+                cursor = connect.cursor()
+
+                if not bool(len(cursor.execute(
+                        "SELECT * FROM users WHERE login = ?",
+                        (self.login,)).fetchall())):
+
+                    cursor.close()
+                    connect.commit()
+                    connect.close()
+                    # <= SQLITE =>
                     result_login = True
                 else:
                     raise LoginBusy()
@@ -426,9 +521,278 @@ class MyWindow(QMainWindow, Ui_MainWindow):  # Главный класс
             self.B_reg_warning_3.show()
 
         if result_login and result_password:
+            # <= SQLITE =>
+            Database = "database.db"
+            connect = sqlite3.connect(Database)
+            cursor = connect.cursor()
+
+            cursor.execute("INSERT INTO users (login) VALUES (?)",
+                           (self.login,))  # Как вносить данные
+            cursor.execute("UPDATE users SET password = ? WHERE login = ?",
+                           (self.password_1, self.login,))  # Обновление данных
+
+            cursor.close()
+            connect.commit()
+            connect.close()
+            # <= SQLITE =>
             self.user()
 
     # =========================== PAGE REGISTRATION ===========================
+
+    # =========================== PAGE FORGOT PASSWORD =======================
+
+    def style_forgot_password(self):
+
+        # /========= CHANGE =========\
+
+        self.B_forgot_password_change.setStyleSheet(B_change)
+        self.B_forgot_password_change.hide()
+
+        # \========= CHANGE =========/
+
+        # /========= BACK =========\
+
+        self.B_forgot_password_back.setIcon(QIcon(img_main))
+        self.B_forgot_password_back.setStyleSheet(B_back)
+
+        # \========= BACK =========/
+
+        # /========= SEND =========\
+
+        self.B_forgot_password_save.setStyleSheet(B_save)
+
+        # \========= SEND =========/
+
+        # /========= BACKGROUND =========\
+
+        # const_0:
+        self.L_forgot_password_const_0.setStyleSheet(const_0)
+
+        # const_1
+        self.L_forgot_password_const_1.setStyleSheet(const_1)
+
+        # const_2:
+        self.L_forgot_password_const_2.setStyleSheet(const_2)
+
+        # const_3:
+        self.L_forgot_password_const_3.setStyleSheet(const_3)
+
+        # \========= BACKGROUND =========/
+
+        # /========= LOGIN =========\
+
+        # login icon:
+
+        self.B_forgot_password_ic_log.setIcon(QIcon(img_log))
+        self.B_forgot_password_ic_log.setStyleSheet(icon_log_pas_email)
+
+        # login:
+        self.LE_forgot_password_login.setPlaceholderText('Login')
+        self.LE_forgot_password_login.setStyleSheet(LE_login_pas_email)
+
+        # \========= LOGIN =========/
+
+        # /========= REGISTRATION =========\
+
+        # email icon:
+        self.B_forgot_password_ic_email.setIcon(QIcon(img_email))
+        self.B_forgot_password_ic_email.setStyleSheet(icon_log_pas_email)
+
+        # email:
+        self.LE_forgot_password_email.setPlaceholderText('Email')
+        self.LE_forgot_password_email.setStyleSheet(LE_login_pas_email)
+
+        # \========= REGISTRATION =========/
+
+        # /========= CODE =========\
+
+        # code icon:
+        self.B_forgot_password_ic_code.setIcon(QIcon(img_code))
+        self.B_forgot_password_ic_code.setStyleSheet(icon_log_pas_email)
+        self.B_forgot_password_ic_code.hide()
+
+        # code:
+        self.LE_forgot_password_code.setPlaceholderText('Code')
+        self.LE_forgot_password_code.setStyleSheet(LE_login_pas_email)
+        self.LE_forgot_password_code.hide()
+
+        # \========= CODE =========/
+
+        # /========= WARNING =========\
+
+        # L_forgot_password_warning:
+        self.L_forgot_password_warning.setStyleSheet(L_warning)
+
+        # warning_1:
+        self.B_forgot_password_warning_1.setIcon(QIcon(img_war))
+        self.B_forgot_password_warning_1.setStyleSheet(icon_warning)
+        self.B_forgot_password_warning_1.hide()
+
+        # warning_2:
+        self.B_forgot_password_warning_2.setIcon(QIcon(img_war))
+        self.B_forgot_password_warning_2.setStyleSheet(icon_warning)
+        self.B_forgot_password_warning_2.hide()
+
+        # warning_3:
+        self.B_forgot_password_warning_3.setIcon(QIcon(img_war))
+        self.B_forgot_password_warning_3.setStyleSheet(icon_warning)
+        self.B_forgot_password_warning_3.hide()
+
+        # \========= WARNING =========/
+
+    def forgot_password(self):
+
+        self.style_forgot_password()
+
+        # =================== BUTTON EVENT ===================
+
+        self.B_forgot_password_save.clicked.connect(self.send)
+        self.B_forgot_password_back.clicked.connect(self.forgot_password_back)
+        self.B_forgot_password_change.clicked.connect(
+            self.forgot_password_change)
+
+        # =================== BUTTON EVENT ===================
+
+    def forgot_password_back(self):  # Функция переключения назад
+
+        # === CLEAR LE ===
+        self.clear_field()
+        # === CLEAR LE ===
+
+        self.stackedWidget.setCurrentWidget(
+            self.page_reg)  # Переключаем страничку
+
+    def forgot_password_change(self):
+
+        self.LE_forgot_password_login.setEnabled(True)
+        self.LE_forgot_password_login.setText('')
+
+        self.LE_forgot_password_email.setEnabled(True)
+        self.LE_forgot_password_email.setText('')
+
+        self.B_forgot_password_ic_code.hide()
+        self.LE_forgot_password_code.setText('')
+        self.LE_forgot_password_code.hide()
+
+        self.B_forgot_password_change.hide()
+
+        self.B_forgot_password_warning_1.hide()
+        self.B_forgot_password_warning_2.hide()
+        self.B_forgot_password_warning_3.hide()
+        self.L_forgot_password_warning.setText('')
+
+        self.forgot_password_GOG = False
+        self.forgot_login, self.forgot_email = None, None
+
+    def send(self):
+        try:
+            result_login, result_email = False, False
+            result = False
+            itog_result = False
+            if not self.forgot_password_GOG:
+
+                self.forgot_login = self.LE_forgot_password_login.text()
+                self.forgot_email = self.LE_forgot_password_email.text()
+
+                class LoginError(Exception):  # Неправильные login
+                    pass
+
+                class EmailError(Exception):  # Неправильные email
+                    pass
+
+                class AcceptError(Exception):  # Непривязана почта
+                    pass
+
+                try:
+                    Database = "database.db"
+                    connect = sqlite3.connect(Database)
+                    cursor = connect.cursor()
+                    if bool(
+                            len(cursor.execute("SELECT * FROM users WHERE login = ?",
+                                               (self.forgot_login,)).fetchall())):
+                        accept_email = \
+                            cursor.execute(
+                                "SELECT email_status FROM users WHERE login = ?",
+                                (self.forgot_login,)).fetchone()[0]
+                        if accept_email:
+                            bd_email = \
+                                cursor.execute(
+                                    "SELECT email FROM users WHERE login = ?",
+                                    (self.forgot_login,)).fetchone()[0]
+                            if bd_email == self.forgot_email:
+                                result = True
+                            else:
+                                raise EmailError()
+                        else:
+                            raise AcceptError()
+                    else:
+                        raise LoginError()
+                except LoginError:
+                    self.B_forgot_password_warning_2.hide()
+                    self.B_forgot_password_warning_1.show()
+                    self.L_forgot_password_warning.setText('Неправильный логин!')
+                except EmailError:
+                    self.B_forgot_password_warning_1.hide()
+                    self.B_forgot_password_warning_2.show()
+                    self.L_forgot_password_warning.setText(
+                        'Неправильный email!')
+                except AcceptError:
+                    self.B_forgot_password_warning_2.show()
+                    self.L_forgot_password_warning.setText(
+                        'Не привязана почта к этому логину!')
+                if result:
+                    self.forgot_password_GOG = True
+
+                    self.LE_forgot_password_login.setEnabled(False)
+                    self.LE_forgot_password_email.setEnabled(False)
+
+                    self.B_forgot_password_warning_1.hide()
+                    self.B_forgot_password_warning_2.hide()
+                    self.L_forgot_password_warning.setText('')
+
+                    self.B_forgot_password_ic_code.show()
+                    self.LE_forgot_password_code.show()
+
+                    self.B_forgot_password_change.show()
+            else:
+                print('Зашло')
+
+                self.LE_forgot_password_login.setEnabled(False)
+                self.LE_forgot_password_email.setEnabled(False)
+
+                class CodeError(Exception):  # Неправильный код
+                    pass
+
+                try:
+                    code_from_email = '12345'
+                    Database = "database.db"
+                    connect = sqlite3.connect(Database)
+                    cursor = connect.cursor()
+
+                    code = str(self.LE_forgot_password_code.text())
+                    if code == code_from_email:
+                        print('Подошло!')
+                        itog_result = True
+                    else:
+                        raise CodeError()
+                except CodeError:
+                    self.B_forgot_password_warning_3.show()
+                    self.L_forgot_password_warning.setText(
+                        'Неправильный код!')
+                if itog_result:
+                    self.B_forgot_password_warning_3.hide()
+                    Database = "database.db"
+                    connect = sqlite3.connect(Database)
+                    cursor = connect.cursor()
+                    password = \
+                        cursor.execute(
+                            "SELECT password FROM users WHERE login = ?",
+                            (self.forgot_login,)).fetchone()[0]
+                    self.L_forgot_password_warning.setText(f"Успех! Ваш пароль: {password}")
+
+        except Exception as e:
+            print(e)
+    # =========================== PAGE FORGOT PASSWORD =======================
 
     # =========================== PAGE USER ===========================
     def style_user(self):  # Стили user
@@ -533,7 +897,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):  # Главный класс
         self.LE_profile_login.setEnabled(False)
         login = self.login
         self.LE_profile_login.setText(login)
-        self.LE_profile_login.setStyleSheet(LE_login_pas)
+        self.LE_profile_login.setStyleSheet(LE_login_pas_email)
         # \========= LOGIN =========/
 
         # /========= PASSWORD =========\
@@ -542,8 +906,8 @@ class MyWindow(QMainWindow, Ui_MainWindow):  # Главный класс
 
         self.LE_profile_password.setEnabled(False)
 
-        self.LE_profile_password.setText(str(len(self.password) * '*'))
-        self.LE_profile_password.setStyleSheet(LE_login_pas)
+        self.LE_profile_password.setText(str(len(self.password_1) * '*'))
+        self.LE_profile_password.setStyleSheet(LE_login_pas_email)
 
         self.B_profile_show_password.setIcon(QIcon(img_close_pas))
         self.B_profile_show_password.setStyleSheet(icon_show_password)
@@ -568,41 +932,42 @@ class MyWindow(QMainWindow, Ui_MainWindow):  # Главный класс
 
     def profile(self):
 
-        print(self.frame)
-        self.login = 'NaFo61'  # Пример
-        self.password = 'Mirosha61'  # Пример
-        self.see_password = False
         self.style_profile()  # стили user
         self.stackedWidget.setCurrentWidget(
             self.page_profile)  # Переключаем страничку
 
         # =================== BUTTON EVENT ===================
+
         self.B_profile_show_password.clicked.connect(self.check_password)
         self.B_profile_back.clicked.connect(self.profile_back)
+
         # =================== BUTTON EVENT ===================
 
     def profile_back(self):
         # === CLEAR LE ===
         self.clear_field()
+        self.see_password = False
         # === CLEAR LE ===
 
         self.stackedWidget.setCurrentWidget(
             self.page_user)  # Переключаем страничку
 
     def check_password(self):
+        text = self.sender()
+        print(text)
         if not self.see_password:
-            self.see_password = True
             self.o_password()
         else:
-            self.see_password = False
             self.c_password()
 
     def o_password(self):
-        self.LE_profile_password.setText(self.password)
+        self.see_password = True
+        self.LE_profile_password.setText(self.password_1)
         self.B_profile_show_password.setIcon(QIcon(img_open_pas))
 
     def c_password(self):
-        self.LE_profile_password.setText(len(self.password) * '*')
+        self.see_password = False
+        self.LE_profile_password.setText(len(self.password_1) * '*')
         self.B_profile_show_password.setIcon(QIcon(img_close_pas))
 
     # =========================== PAGE PROFILE ===========================
@@ -626,7 +991,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):  # Главный класс
 
             self.L_edit_profile_1.setStyleSheet(L_default)
 
-            self.LE_edit_profile_login.setStyleSheet(LE_login_pas)
+            self.LE_edit_profile_login.setStyleSheet(LE_login_pas_email)
             # \========= LOGIN =========/
 
             # /========= PASSWORD =========\
@@ -636,7 +1001,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):  # Главный класс
 
             self.L_edit_profile_2.setStyleSheet(L_default)
 
-            self.LE_edit_profile_password.setStyleSheet(LE_login_pas)
+            self.LE_edit_profile_password.setStyleSheet(LE_login_pas_email)
 
             # \========= PASSWORD =========/
 
@@ -700,6 +1065,23 @@ class MyWindow(QMainWindow, Ui_MainWindow):  # Главный класс
         self.mainToggle.show()
 
         # mainToggle.stateChanged.connect(secondaryToggle.setChecked)
+
+        Database = "database.db"
+        connect = sqlite3.connect(Database)
+        cursor = connect.cursor()
+
+        status = \
+            cursor.execute("SELECT profile_status FROM users WHERE login = ?",
+                           (self.login,)).fetchone()[0]
+        cursor.close()
+        connect.commit()
+        connect.close()
+
+        if status:
+            self.mainToggle.setChecked(True)
+        else:
+            self.mainToggle.setChecked(False)
+
         self.mainToggle.stateChanged.connect(self.switch)
 
         # \=========== Toggle ===========/
@@ -714,6 +1096,31 @@ class MyWindow(QMainWindow, Ui_MainWindow):  # Главный класс
 
     def switch(self):
         self.result = self.mainToggle.isChecked()
+        if self.result:
+
+            Database = "database.db"
+            connect = sqlite3.connect(Database)
+            cursor = connect.cursor()
+
+            cursor.execute(
+                "UPDATE users SET profile_status = ? WHERE login = ?",
+                (True, self.login,))  # Обновление данных
+
+            cursor.close()
+            connect.commit()
+            connect.close()
+        else:
+            Database = "database.db"
+            connect = sqlite3.connect(Database)
+            cursor = connect.cursor()
+
+            cursor.execute(
+                "UPDATE users SET profile_status = ? WHERE login = ?",
+                (False, self.login,))  # Обновление данных
+
+            cursor.close()
+            connect.commit()
+            connect.close()
 
     def edit_profile_back(self):
         # === CLEAR LE ===
@@ -727,34 +1134,64 @@ class MyWindow(QMainWindow, Ui_MainWindow):  # Главный класс
         class LoginSymbolError(Exception):  # Ошибка символом
             pass
 
-        class LoginBusy(Exception):  # Ошибка индивидуальности логина
+        class LoginBusyError(Exception):  # Ошибка индивидуальности логина
+            pass
+
+        class LoginLastError(Exception):  # Ошибка, когда новый = прошлому
             pass
 
         login = self.LE_edit_profile_login.text()  # Вывод логина
         result = False  # Ресультат проверки
 
-        BD = []  # База Данных логинов
-
         try:
             if re.fullmatch(r"[a-zA-Z0-9]+", login):
-                if login not in BD:
-                    result = True
+                Database = "database.db"
+                connect = sqlite3.connect(Database)
+                cursor = connect.cursor()
+
+                if not bool(len(cursor.execute(
+                        "SELECT * FROM users WHERE login = ?",
+                        (login,)).fetchall())):
+                    cursor.close()
+                    connect.commit()
+                    connect.close()
+                    if self.login != login:
+                        result = True
+                    else:
+                        raise LoginLastError()
                 else:
-                    raise LoginBusy()
+                    raise LoginBusyError()
             else:
                 raise LoginSymbolError()
         except LoginSymbolError:
             self.L_edit_profile_warning.setText(
                 '✖ В логине есть недопустимые символы! ✖')
             self.B_edit_profile_warning_1.show()
-        except LoginBusy:
+        except LoginBusyError:
             self.L_edit_profile_warning.setText(
                 '       ✖ Такой логин уже занят! ✖')
             self.B_edit_profile_warning_1.show()
         if result:
             self.L_edit_profile_warning.setText('✔ Логин успешно изменен ✔')
             self.B_edit_profile_warning_1.hide()
+            # self.login = login
+
+            # <= SQLITE =>
+            Database = "database.db"
+            connect = sqlite3.connect(Database)
+            cursor = connect.cursor()
+
+            self.id = cursor.execute("SELECT id FROM users WHERE login = ?",
+                                     (self.login,)).fetchone()[0]
+            cursor.execute("UPDATE users SET login = ? WHERE id = ?",
+                           (login, self.id,))
+
+            cursor.close()
+            connect.commit()
+            connect.close()
+            # <= SQLITE =>
             self.login = login
+            self.B_edit_profile_warning_1.hide()
 
     def save_password(self):
         class PasswordLenghtError(Exception):  # Ошибка длины пароля
@@ -763,12 +1200,18 @@ class MyWindow(QMainWindow, Ui_MainWindow):  # Главный класс
         class PasswordSymbolError(Exception):  # Ошибка символом
             pass
 
+        class PasswordLastError(Exception):  # Ошибка, когда новый = прошлому
+            pass
+
         password = self.LE_edit_profile_password.text()  # Вывод логина
         result = False  # Ресультат проверки
         try:
             if re.fullmatch(r'[a-zA-Z0-9]+', password):
                 if len(password) >= 8:
-                    result = True
+                    if self.password_1 != password:
+                        result = True
+                    else:
+                        raise PasswordLastError()
                 else:
                     raise PasswordLenghtError()
             else:
@@ -781,10 +1224,30 @@ class MyWindow(QMainWindow, Ui_MainWindow):  # Главный класс
             self.L_edit_profile_warning.setText(
                 '      ✖ Пароль короче 8 символов ✖')
             self.B_edit_profile_warning_2.show()
+        except PasswordLastError:
+            self.L_edit_profile_warning.setText(
+                '✖ Новый пароль не может быть прошлым ✖')
+            self.B_edit_profile_warning_2.show()
+
         if result:
             self.L_edit_profile_warning.setText('✔ Пароль успешно изменен ✔')
             self.B_edit_profile_warning_2.hide()
-            self.password = password
+            # <= SQLITE =>
+            Database = "database.db"
+            connect = sqlite3.connect(Database)
+            cursor = connect.cursor()
+
+            self.id = cursor.execute("SELECT id FROM users WHERE login = ?",
+                                     (self.login,)).fetchone()[0]
+            cursor.execute("UPDATE users SET password = ? WHERE id = ?",
+                           (password, self.id,))
+
+            cursor.close()
+            connect.commit()
+            connect.close()
+            # <= SQLITE =>
+            self.password_1 = password
+            self.B_edit_profile_warning_2.hide()
 
     # =========================== PAGE EDIT PROFILE ===========================
 
@@ -792,6 +1255,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):  # Главный класс
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     mywindow = MyWindow()
-    mywindow.setStyleSheet('background-color: rgb(51, 51, 51); border-radius: 10px')
+    mywindow.setStyleSheet(
+        'background-color: rgb(51, 51, 51); border-radius: 10px')
     mywindow.show()
     sys.exit(app.exec())

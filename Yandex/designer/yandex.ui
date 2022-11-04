@@ -597,6 +597,19 @@
          <string/>
         </property>
        </widget>
+       <widget class="QPushButton" name="B_reg_forgot_password">
+        <property name="geometry">
+         <rect>
+          <x>439</x>
+          <y>630</y>
+          <width>125</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>📪 forgot password 📪</string>
+        </property>
+       </widget>
        <zorder>L_reg_const_1</zorder>
        <zorder>L_reg_const_2</zorder>
        <zorder>L_reg_const_0</zorder>
@@ -614,6 +627,238 @@
        <zorder>L_reg_warning_1</zorder>
        <zorder>L_reg_warning_2</zorder>
        <zorder>L_reg_const_3</zorder>
+       <zorder>B_reg_forgot_password</zorder>
+      </widget>
+      <widget class="QWidget" name="page_forgot_password">
+       <widget class="QLabel" name="L_forgot_password_const_0">
+        <property name="geometry">
+         <rect>
+          <x>410</x>
+          <y>150</y>
+          <width>300</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>FORGOT PASSWORD</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="L_forgot_password_const_1">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>120</y>
+          <width>500</width>
+          <height>380</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="L_forgot_password_const_2">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>280</y>
+          <width>500</width>
+          <height>380</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="L_forgot_password_const_3">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>640</y>
+          <width>500</width>
+          <height>45</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="LE_forgot_password_login">
+        <property name="geometry">
+         <rect>
+          <x>355</x>
+          <y>340</y>
+          <width>310</width>
+          <height>50</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="LE_forgot_password_email">
+        <property name="geometry">
+         <rect>
+          <x>355</x>
+          <y>420</y>
+          <width>310</width>
+          <height>50</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="LE_forgot_password_code">
+        <property name="geometry">
+         <rect>
+          <x>355</x>
+          <y>500</y>
+          <width>310</width>
+          <height>50</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="B_forgot_password_save">
+        <property name="geometry">
+         <rect>
+          <x>375</x>
+          <y>580</y>
+          <width>250</width>
+          <height>40</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>✰ SEND ✰</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="B_forgot_password_ic_log">
+        <property name="geometry">
+         <rect>
+          <x>300</x>
+          <y>340</y>
+          <width>50</width>
+          <height>50</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="B_forgot_password_ic_email">
+        <property name="geometry">
+         <rect>
+          <x>300</x>
+          <y>420</y>
+          <width>50</width>
+          <height>50</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="B_forgot_password_ic_code">
+        <property name="geometry">
+         <rect>
+          <x>300</x>
+          <y>500</y>
+          <width>50</width>
+          <height>50</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="B_forgot_password_back">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>120</y>
+          <width>70</width>
+          <height>70</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="B_forgot_password_change">
+        <property name="geometry">
+         <rect>
+          <x>439</x>
+          <y>630</y>
+          <width>125</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>change login/email</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="B_forgot_password_warning_1">
+        <property name="geometry">
+         <rect>
+          <x>680</x>
+          <y>340</y>
+          <width>51</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="B_forgot_password_warning_2">
+        <property name="geometry">
+         <rect>
+          <x>680</x>
+          <y>420</y>
+          <width>51</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="B_forgot_password_warning_3">
+        <property name="geometry">
+         <rect>
+          <x>680</x>
+          <y>500</y>
+          <width>51</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="L_forgot_password_warning">
+        <property name="geometry">
+         <rect>
+          <x>360</x>
+          <y>290</y>
+          <width>301</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <zorder>L_forgot_password_const_3</zorder>
+       <zorder>L_forgot_password_const_1</zorder>
+       <zorder>L_forgot_password_const_2</zorder>
+       <zorder>L_forgot_password_const_0</zorder>
+       <zorder>LE_forgot_password_login</zorder>
+       <zorder>LE_forgot_password_email</zorder>
+       <zorder>LE_forgot_password_code</zorder>
+       <zorder>B_forgot_password_save</zorder>
+       <zorder>B_forgot_password_ic_log</zorder>
+       <zorder>B_forgot_password_ic_email</zorder>
+       <zorder>B_forgot_password_ic_code</zorder>
+       <zorder>B_forgot_password_back</zorder>
+       <zorder>B_forgot_password_change</zorder>
+       <zorder>B_forgot_password_warning_1</zorder>
+       <zorder>B_forgot_password_warning_2</zorder>
+       <zorder>B_forgot_password_warning_3</zorder>
+       <zorder>L_forgot_password_warning</zorder>
       </widget>
       <widget class="QWidget" name="page_user">
        <widget class="QLabel" name="L_user_const_1">
