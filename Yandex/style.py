@@ -59,7 +59,7 @@ L_default_W = 'background-color: rgb(227, 154, 9);'
 L_close_profile_W = 'background-color: rgb(227, 154, 9); ' \
                     'font-size: 20px;'
 
-Frame_W = 'background-color: rgb(142, 216, 250); ' \
+Frame_W = 'background-color: rgb(238, 255, 56); ' \
           'border-radius: 0px;'
 
 # /================== ICON ==================\
@@ -151,7 +151,7 @@ L_close_profile_B = 'background-color: rgb(74, 15, 168); ' \
                     'font-size: 20px;' \
                     'color: white;'
 
-Frame_B = 'background-color: rgb(120, 83, 219); ' \
+Frame_B = 'background-color: rgb(118, 69, 255); ' \
           'border-radius: 0px;'
 
 # /================== ICON ==================\

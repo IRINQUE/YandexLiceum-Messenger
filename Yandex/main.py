@@ -114,9 +114,9 @@ class MyWindow(QMainWindow, Ui_MainWindow):  # Главный класс
         # \=================== BUTTON EVENT ===================/
 
     def skip_log_reg(self):
-        self.login = 'NaFo61'
-        self.password_1 = 'Mirosha61'
-        self.password_2 = 'Mirosha61'
+        self.login = 'test_log'
+        self.password_1 = 'test_pas'
+        self.password_2 = 'test_pas'
         self.user()
 
     def style_new_user(self):  # Стили new_user
