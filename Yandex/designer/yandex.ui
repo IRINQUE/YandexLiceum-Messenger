@@ -1208,7 +1208,7 @@
         <property name="geometry">
          <rect>
           <x>355</x>
-          <y>340</y>
+          <y>320</y>
           <width>310</width>
           <height>50</height>
          </rect>
@@ -1218,7 +1218,7 @@
         <property name="geometry">
          <rect>
           <x>355</x>
-          <y>430</y>
+          <y>400</y>
           <width>310</width>
           <height>50</height>
          </rect>
@@ -1228,7 +1228,7 @@
         <property name="geometry">
          <rect>
           <x>360</x>
-          <y>320</y>
+          <y>300</y>
           <width>101</width>
           <height>16</height>
          </rect>
@@ -1241,7 +1241,7 @@
         <property name="geometry">
          <rect>
           <x>360</x>
-          <y>410</y>
+          <y>380</y>
           <width>101</width>
           <height>16</height>
          </rect>
@@ -1254,7 +1254,7 @@
         <property name="geometry">
          <rect>
           <x>300</x>
-          <y>340</y>
+          <y>320</y>
           <width>50</width>
           <height>50</height>
          </rect>
@@ -1267,7 +1267,7 @@
         <property name="geometry">
          <rect>
           <x>300</x>
-          <y>430</y>
+          <y>400</y>
           <width>50</width>
           <height>50</height>
          </rect>
@@ -1280,7 +1280,7 @@
         <property name="geometry">
          <rect>
           <x>680</x>
-          <y>340</y>
+          <y>320</y>
           <width>50</width>
           <height>50</height>
          </rect>
@@ -1293,7 +1293,7 @@
         <property name="geometry">
          <rect>
           <x>680</x>
-          <y>430</y>
+          <y>400</y>
           <width>50</width>
           <height>50</height>
          </rect>
@@ -1306,7 +1306,7 @@
         <property name="geometry">
          <rect>
           <x>360</x>
-          <y>610</y>
+          <y>630</y>
           <width>181</width>
           <height>31</height>
          </rect>
@@ -1319,7 +1319,7 @@
         <property name="geometry">
          <rect>
           <x>360</x>
-          <y>290</y>
+          <y>280</y>
           <width>301</width>
           <height>20</height>
          </rect>
@@ -1358,7 +1358,7 @@
         <property name="geometry">
          <rect>
           <x>300</x>
-          <y>600</y>
+          <y>620</y>
           <width>50</width>
           <height>50</height>
          </rect>
@@ -1371,7 +1371,7 @@
         <property name="geometry">
          <rect>
           <x>300</x>
-          <y>520</y>
+          <y>480</y>
           <width>50</width>
           <height>50</height>
          </rect>
@@ -1384,7 +1384,7 @@
         <property name="geometry">
          <rect>
           <x>355</x>
-          <y>520</y>
+          <y>480</y>
           <width>310</width>
           <height>50</height>
          </rect>
@@ -1394,7 +1394,7 @@
         <property name="geometry">
          <rect>
           <x>680</x>
-          <y>520</y>
+          <y>480</y>
           <width>50</width>
           <height>50</height>
          </rect>
@@ -1407,7 +1407,7 @@
         <property name="geometry">
          <rect>
           <x>360</x>
-          <y>500</y>
+          <y>460</y>
           <width>101</width>
           <height>16</height>
          </rect>
@@ -1416,6 +1416,79 @@
          <string>Добавить почту:</string>
         </property>
        </widget>
+       <widget class="QPushButton" name="B_edit_profile_ic_code">
+        <property name="geometry">
+         <rect>
+          <x>300</x>
+          <y>560</y>
+          <width>50</width>
+          <height>50</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="LE_edit_profile_code">
+        <property name="geometry">
+         <rect>
+          <x>355</x>
+          <y>560</y>
+          <width>310</width>
+          <height>50</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="B_edit_profile_warning_4">
+        <property name="geometry">
+         <rect>
+          <x>680</x>
+          <y>560</y>
+          <width>50</width>
+          <height>50</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="L_edit_profile_4">
+        <property name="geometry">
+         <rect>
+          <x>360</x>
+          <y>540</y>
+          <width>101</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Код:</string>
+        </property>
+       </widget>
+       <zorder>L_edit_profile_const_3</zorder>
+       <zorder>L_edit_profile_const_1</zorder>
+       <zorder>L_edit_profile_const_2</zorder>
+       <zorder>L_edit_profile_const_0</zorder>
+       <zorder>LE_edit_profile_login</zorder>
+       <zorder>LE_edit_profile_password</zorder>
+       <zorder>L_edit_profile_1</zorder>
+       <zorder>L_edit_profile_2</zorder>
+       <zorder>B_edit_profile_save_login</zorder>
+       <zorder>B_edit_profile_save_password</zorder>
+       <zorder>B_edit_profile_warning_1</zorder>
+       <zorder>B_edit_profile_warning_2</zorder>
+       <zorder>L_edit_profile_close_profile</zorder>
+       <zorder>L_edit_profile_warning</zorder>
+       <zorder>B_edit_profile_back</zorder>
+       <zorder>B_edit_profile_save_email</zorder>
+       <zorder>LE_edit_profile_email</zorder>
+       <zorder>B_edit_profile_warning_3</zorder>
+       <zorder>L_edit_profile_3</zorder>
+       <zorder>B_edit_profile_ic_code</zorder>
+       <zorder>LE_edit_profile_code</zorder>
+       <zorder>B_edit_profile_warning_4</zorder>
+       <zorder>L_edit_profile_4</zorder>
+       <zorder>B_edit_profile_close_profile</zorder>
       </widget>
      </widget>
     </item>

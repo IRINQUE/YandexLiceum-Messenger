@@ -1,4 +1,4 @@
-Input_dialog = 'background-color: white'
+Input_dialog = 'background-color: grey'
 
 # /========= BACKGROUND =========\
 
