@@ -54,7 +54,7 @@
        </size>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>6</number>
       </property>
       <widget class="QWidget" name="page_new_user">
        <widget class="QPushButton" name="B_new_user_reg">
@@ -160,14 +160,14 @@
        <widget class="QLabel" name="L_new_user_const_0">
         <property name="geometry">
          <rect>
-          <x>410</x>
+          <x>380</x>
           <y>150</y>
           <width>300</width>
           <height>100</height>
          </rect>
         </property>
         <property name="text">
-         <string>HELLO!</string>
+         <string>😊 Welcome 😊</string>
         </property>
        </widget>
        <widget class="QPushButton" name="skip">
@@ -242,8 +242,13 @@
           <height>100</height>
          </rect>
         </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
         <property name="text">
-         <string>LOG IN!</string>
+         <string>🠗 LOG IN 🠗</string>
         </property>
        </widget>
        <widget class="QPushButton" name="B_log_ic_log">
@@ -370,6 +375,19 @@
          <string/>
         </property>
        </widget>
+       <widget class="QPushButton" name="B_log_forgot_password">
+        <property name="geometry">
+         <rect>
+          <x>440</x>
+          <y>630</y>
+          <width>125</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>📪 forgot password 📪</string>
+        </property>
+       </widget>
        <zorder>L_log_const_1</zorder>
        <zorder>L_log_const_2</zorder>
        <zorder>L_log_const_0</zorder>
@@ -383,6 +401,7 @@
        <zorder>B_log_warning_2</zorder>
        <zorder>L_log_warning</zorder>
        <zorder>L_log_const_3</zorder>
+       <zorder>B_log_forgot_password</zorder>
       </widget>
       <widget class="QWidget" name="page_reg">
        <widget class="QPushButton" name="B_reg_back">
@@ -433,8 +452,13 @@
           <height>100</height>
          </rect>
         </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
         <property name="text">
-         <string>REG IN!</string>
+         <string>🠗 REG IN 🠗</string>
         </property>
        </widget>
        <widget class="QPushButton" name="B_reg_ic_log">
@@ -597,19 +621,6 @@
          <string/>
         </property>
        </widget>
-       <widget class="QPushButton" name="B_reg_forgot_password">
-        <property name="geometry">
-         <rect>
-          <x>439</x>
-          <y>630</y>
-          <width>125</width>
-          <height>23</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>📪 forgot password 📪</string>
-        </property>
-       </widget>
        <zorder>L_reg_const_1</zorder>
        <zorder>L_reg_const_2</zorder>
        <zorder>L_reg_const_0</zorder>
@@ -627,7 +638,6 @@
        <zorder>L_reg_warning_1</zorder>
        <zorder>L_reg_warning_2</zorder>
        <zorder>L_reg_const_3</zorder>
-       <zorder>B_reg_forgot_password</zorder>
       </widget>
       <widget class="QWidget" name="page_forgot_password">
        <widget class="QLabel" name="L_forgot_password_const_0">
@@ -903,14 +913,14 @@
        <widget class="QLabel" name="L_user_const_0">
         <property name="geometry">
          <rect>
-          <x>410</x>
+          <x>360</x>
           <y>150</y>
           <width>300</width>
           <height>100</height>
          </rect>
         </property>
         <property name="text">
-         <string>ALL GOOD!</string>
+         <string>😀 U're logged in 😀</string>
         </property>
        </widget>
        <widget class="QFrame" name="F_user_1">
@@ -1042,7 +1052,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>PROFILE</string>
+         <string>🠗 U'r profile 🠗</string>
         </property>
        </widget>
        <widget class="QLineEdit" name="LE_profile_login">
@@ -1072,17 +1082,17 @@
         <property name="geometry">
          <rect>
           <x>355</x>
-          <y>440</y>
+          <y>550</y>
           <width>310</width>
           <height>50</height>
          </rect>
         </property>
        </widget>
-       <widget class="QLabel" name="L_profile_2">
+       <widget class="QLabel" name="L_profile_3">
         <property name="geometry">
          <rect>
           <x>360</x>
-          <y>420</y>
+          <y>530</y>
           <width>101</width>
           <height>16</height>
          </rect>
@@ -1095,7 +1105,7 @@
         <property name="geometry">
          <rect>
           <x>630</x>
-          <y>450</y>
+          <y>560</y>
           <width>31</width>
           <height>31</height>
          </rect>
@@ -1130,6 +1140,29 @@
          <string/>
         </property>
        </widget>
+       <widget class="QLineEdit" name="LE_profile_email">
+        <property name="geometry">
+         <rect>
+          <x>355</x>
+          <y>440</y>
+          <width>310</width>
+          <height>50</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="L_profile_2">
+        <property name="geometry">
+         <rect>
+          <x>360</x>
+          <y>420</y>
+          <width>101</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Ваша почта:</string>
+        </property>
+       </widget>
       </widget>
       <widget class="QWidget" name="page_edit_profile">
        <widget class="QLabel" name="L_edit_profile_const_1">
@@ -1161,14 +1194,14 @@
        <widget class="QLabel" name="L_edit_profile_const_0">
         <property name="geometry">
          <rect>
-          <x>320</x>
+          <x>380</x>
           <y>150</y>
-          <width>411</width>
+          <width>311</width>
           <height>100</height>
          </rect>
         </property>
         <property name="text">
-         <string>EDIT PROFILE</string>
+         <string>🠗 EDIT PROFILE 🠗</string>
         </property>
        </widget>
        <widget class="QLineEdit" name="LE_edit_profile_login">
@@ -1273,13 +1306,13 @@
         <property name="geometry">
          <rect>
           <x>360</x>
-          <y>540</y>
+          <y>610</y>
           <width>181</width>
           <height>31</height>
          </rect>
         </property>
         <property name="text">
-         <string>Закрытый профиль</string>
+         <string>Темная тема</string>
         </property>
        </widget>
        <widget class="QLabel" name="L_edit_profile_warning">
@@ -1325,13 +1358,62 @@
         <property name="geometry">
          <rect>
           <x>300</x>
-          <y>530</y>
+          <y>600</y>
           <width>50</width>
           <height>50</height>
          </rect>
         </property>
         <property name="text">
          <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="B_edit_profile_save_email">
+        <property name="geometry">
+         <rect>
+          <x>300</x>
+          <y>520</y>
+          <width>50</width>
+          <height>50</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="LE_edit_profile_email">
+        <property name="geometry">
+         <rect>
+          <x>355</x>
+          <y>520</y>
+          <width>310</width>
+          <height>50</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="B_edit_profile_warning_3">
+        <property name="geometry">
+         <rect>
+          <x>680</x>
+          <y>520</y>
+          <width>50</width>
+          <height>50</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="L_edit_profile_3">
+        <property name="geometry">
+         <rect>
+          <x>360</x>
+          <y>500</y>
+          <width>101</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Добавить почту:</string>
         </property>
        </widget>
       </widget>

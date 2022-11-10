@@ -15,7 +15,7 @@ class AnimatedToggle(QCheckBox):
     def __init__(self,
         parent=None,
         bar_color=Qt.gray,
-        checked_color="#00B0FF",
+        checked_color="#359edb",
         handle_color=Qt.white,
         pulse_unchecked_color="#44999999",
         pulse_checked_color="#4400B0EE"
